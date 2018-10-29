@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+    dependencies {
+        classpath 'com.github.ksoichiro:gradle-eclipse-aar-plugin:0.1.1'
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'org.jacoco:org.jacoco.core:0.7.5.201505241946'
+    }
+}
+
+allprojects {
+    group = GROUP
+    version = VERSION_NAME
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+}
+
+subprojects {
+    buildscript {
+        repositories {
+            jcenter()
+            mavenCentral()
+            maven {
+                url 'https://maven.google.com/'
+                name 'Google'
+            }
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:2.3.3'
+            classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.1.0'
+        }
+    }
+}
+
+apply plugin: 'com.github.ksoichiro.eclipse.aar'
+
+eclipseAar {
+    projectNamePrefix = 'observablescrollview-'
+    cleanLibsDirectoryEnabled = true
+}
